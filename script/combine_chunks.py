@@ -16,7 +16,6 @@ for file in file_list:
         # valid codes found in chunk
         if data.rstrip() != "":
             full = full + data.rstrip() + ","
-
 itunes_codes = full.split(",")
 itunes_codes = list(filter(None, itunes_codes))
 
@@ -24,7 +23,6 @@ itunes_codes = list(filter(None, itunes_codes))
 df_countries = pd.read_csv(
     "script/alpha2_countries.csv", encoding="utf8", keep_default_na=False
 ).set_index("alpha2")
-
 dict_countries = df_countries["country"].to_dict()
 
 # 3. Match supported iTunes codes with alpha-2 country names
@@ -33,23 +31,22 @@ for alpha2 in itunes_codes:
     try:
         itunes_countries[alpha2] = dict_countries[alpha2]
     except KeyError as e:
-        print(e, "is an unknown Country code. Please update the CSV table.")
+        print("•", e, "is an unknown Country code. Please update the CSV table.")
         itunes_countries[alpha2] = "-"
-
 new = dict(sorted(itunes_countries.items(), key=lambda item: item[1]))
 
-# 4. Detect changes
+# 4. Compared to latest version
 try:
     old = json.load(open("itunes_country_codes.json"))
 except FileNotFoundError:
     old = {}
-
+    
 diffAdd = sorted(new.keys() - old)
 diffRm = sorted(old.keys() - new)
 diffValues = sorted([key for key in old.keys() & new if old[key] != new[key]])
-writeFile = False
 
 # 5. Output changes
+writeFile = False
 if len(diffAdd) > 0:
     writeFile = True
     print("• Added:", diffAdd)
@@ -60,11 +57,11 @@ if len(diffRm) > 0:
 
 if old != new:
     writeFile = True
-    for diff in sorted(diffValues):
-        print("• Updated country name(s):", diffValues)
+    print("• Updated country name(s):", sorted(diffValues))
 
 if writeFile:
     with open("itunes_country_codes.json", "w", encoding="utf-8") as f:
         json.dump(new, f, ensure_ascii=False, indent=4)
 else:
     print("identical")
+    
