@@ -31,7 +31,7 @@ for alpha2 in itunes_codes:
     try:
         itunes_countries[alpha2] = dict_countries[alpha2]
     except KeyError as e:
-        print("•", e, "is an unknown Country code. Please update the CSV table.")
+        print("•", e, "is an unknown Country code. Update the CSV table.")
         itunes_countries[alpha2] = "-"
 new = dict(sorted(itunes_countries.items(), key=lambda item: item[1]))
 
@@ -40,7 +40,7 @@ try:
     old = json.load(open("itunes_country_codes.json"))
 except FileNotFoundError:
     old = {}
-    
+
 diffAdd = sorted(new.keys() - old)
 diffRm = sorted(old.keys() - new)
 diffValues = sorted([key for key in old.keys() & new if old[key] != new[key]])
@@ -64,4 +64,3 @@ if writeFile:
         json.dump(new, f, ensure_ascii=False, indent=4)
 else:
     print("identical")
-    
