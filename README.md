@@ -6,4 +6,4 @@ List of all available iTunes Country codes used for iTunes Store, Search API and
 
 A GitHub Action runs daily at 02:00 UTC and publishes detected changes automatically.
 
-[Permalink to JSON file](itunes_country_codes.json)
+[Permalink to JSON file](itunes_country_codes.json) ([Raw](itunes_country_codes.json?raw=1))
