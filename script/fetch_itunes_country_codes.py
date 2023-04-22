@@ -14,7 +14,9 @@ def fetch_iTunes_countries(list_alpha2):
     # setup session to use retries when API throttles
     s = requests.Session()
     retry_strategy = Retry(
-        total=100, backoff_factor=5, status_forcelist=[403, 500, 502, 503, 504]
+        total=100,  # total number of retries
+        backoff_factor=5,  # incremental delay after first try
+        status_forcelist=[401, 402, 403, 429, 500, 502, 503, 504],
     )
     s.mount("https://", HTTPAdapter(max_retries=retry_strategy))
 
