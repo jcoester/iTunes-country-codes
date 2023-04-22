@@ -55,9 +55,6 @@ jobs:
       - name: Get current date
         id: date
         run: echo "date=$(date +'%Y-%b-%d')" >> $GITHUB_OUTPUT
-      - name: Get unix timestamp
-        id: unix
-        run: echo "date=$(date +'%s')" >> $GITHUB_OUTPUT
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v3
       - name: Combine chunks
@@ -75,6 +72,6 @@ jobs:
         if: env.CHANGELOG != 'identical'
         with:
           files: itunes_country_codes.json
-          name: Update ${{ steps.date.outputs.date }}
-          tag_name: ${{ steps.unix.outputs.date }}
+          name: ${{ steps.date.outputs.date }}
+          tag_name: ${{ steps.date.outputs.date }}
           body: ${{ env.CHANGELOG }}

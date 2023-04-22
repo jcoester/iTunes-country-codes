@@ -43,21 +43,29 @@ except FileNotFoundError:
 
 diffAdd = sorted(new.keys() - old)
 diffRm = sorted(old.keys() - new)
-diffValues = sorted([key for key in old.keys() & new if old[key] != new[key]])
+diffNames = sorted([key for key in old.keys() & new if old[key] != new[key]])
 
 # 5. Output changes
 writeFile = False
 if len(diffAdd) > 0:
     writeFile = True
-    print("• Added:", diffAdd)
+    print("**Added**")
+    for add in diffAdd:
+        print("•", add + ":", new[add])
+    print("")
 
 if len(diffRm) > 0:
     writeFile = True
-    print("• Removed:", diffRm)
+    print("**Removed**")
+    for rm in diffRm:
+        print("•", rm + ":", old[rm])
+    print("")
 
-if old != new:
+if len(diffNames) > 0:
     writeFile = True
-    print("• Updated country name(s):", sorted(diffValues))
+    print("**Updated**")
+    for name in diffNames:
+        print("•", name + ":", new[name])
 
 if writeFile:
     with open("itunes_country_codes.json", "w", encoding="utf-8") as f:
