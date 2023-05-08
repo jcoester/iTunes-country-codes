@@ -21,9 +21,9 @@ def fetch_iTunes_countries(list_alpha2):
     s.mount("https://", HTTPAdapter(max_retries=retry_strategy))
 
     # search itunes country store
-    api = "https://itunes.apple.com/search?"
+    api = "https://itunes.apple.com/search?country="
     for alpha2 in list_alpha2:
-        response = s.get(api + "limit=1&country=" + alpha2)
+        response = s.get(api + alpha2)
 
         # check for valid response
         if response.status_code == 200:
