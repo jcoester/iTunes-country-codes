@@ -16,7 +16,7 @@ def fetch_iTunes_countries(list_alpha2):
     retry_strategy = Retry(
         total=100,  # total number of retries
         backoff_factor=5,  # incremental delay after first try
-        status_forcelist=[401, 402, 403, 413, 429, 500, 502, 503, 504],
+        status_forcelist=[401, 402, 403, 404, 413, 429, 500, 502, 503, 504],
     )
     s.mount("https://", HTTPAdapter(max_retries=retry_strategy))
 
