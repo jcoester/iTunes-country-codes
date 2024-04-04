@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+      - dev
   pull_request:
     branches:
       - main
+      - dev
 
 permissions:
   checks: write
@@ -21,7 +23,7 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set up Python 3.10
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
@@ -31,5 +33,5 @@ jobs:
 
       - name: Run linters
         run: |
-          flake8 --max-line-length=100 .
           black .
+          flake8 .

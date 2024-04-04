@@ -10,9 +10,7 @@ base_path = "./"
 full = ""
 
 # List all files in the directory
-file_list = [
-    f for f in os.listdir(base_path) if f.startswith("c") and f.endswith(".json")
-]
+file_list = [f for f in os.listdir(base_path) if f.startswith("c_")]
 
 # Combine chunk data
 for file in file_list:
@@ -28,7 +26,7 @@ itunes_codes = list(filter(None, itunes_codes))
 
 # 2. Load list of alpha-2 country names
 df_countries = pd.read_csv(
-    "script/alpha2_countries.csv", encoding="utf8", keep_default_na=False
+    "script/data/alpha2_countries.csv", encoding="utf8", keep_default_na=False
 ).set_index("alpha2")
 dict_countries = df_countries["country"].to_dict()
 
