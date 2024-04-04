@@ -40,7 +40,7 @@ def split(alist, n):
 def main():
     # 1. Load list of all 676 available ISO 3166-1 alpha-2 codes
     # From https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
-    list_alpha2 = json.load(open("script/iso3166_1_alpha2.json"))
+    list_alpha2 = json.load(open("script/data/iso3166_1_alpha2.json"))
     assert len(list_alpha2) == 676
 
     # 2. Split into chunks to enable parallel execution

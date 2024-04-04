@@ -4,13 +4,11 @@ on:
   push:
     branches:
       - main
+      - dev
   pull_request:
     branches:
       - main
-
-permissions:
-  checks: write
-  contents: write
+      - dev
 
 jobs:
   run-linters:
@@ -21,7 +19,7 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set up Python 3.10
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
@@ -30,6 +28,7 @@ jobs:
         run: pip install black flake8
 
       - name: Run linters
-        run: |
-          flake8 --max-line-length=100 .
-          black .
+        uses: wearerequired/lint-action@v2.3.0
+        with:
+          black: true
+          flake8: true
