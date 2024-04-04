@@ -10,7 +10,8 @@ base_path = "./"
 full = ""
 
 # List all files in the directory
-file_list = os.listdir(base_path)
+file_list = [f for f in os.listdir(base_path)
+    if f.startswith("c") and f.endswith(".json")]
 
 # Combine chunk data
 for file in file_list:
