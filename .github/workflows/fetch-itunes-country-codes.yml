@@ -88,3 +88,12 @@ jobs:
         with:
           commit_message: "(Automated) Updated iTunes Country codes"
           file_pattern: 'itunes_country_codes.json'
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: env.CHANGELOG != 'identical'
+        with:
+          files: itunes_country_codes.json
+          name: ${{ steps.date.outputs.date }}
+          tag_name: ${{ steps.date.outputs.date }}
+          body: ${{ env.CHANGELOG }}
