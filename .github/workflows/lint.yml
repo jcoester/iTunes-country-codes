@@ -32,7 +32,6 @@ jobs:
         run: pip install black flake8
 
       - name: Run linters
-        uses: wearerequired/lint-action@v2.3.0
-        with:
-          black: true
-          flake8: true
+        run: |
+          black .
+          flake8 .
