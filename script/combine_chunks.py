@@ -5,14 +5,12 @@ import json
 import os
 import pandas as pd
 
-# Specify the base directory where artifacts are downloaded
+# Specify the base directory
 base_path = "./"
-
-# Initialize variables
 full = ""
 
 # List all files in the directory
-file_list = [f for f in os.listdir(base_path) if f.startswith("c") and f.endswith(".json")]
+file_list = os.listdir(base_path)
 
 # Combine chunk data
 for file in file_list:
