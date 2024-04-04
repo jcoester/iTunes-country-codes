@@ -5,17 +5,24 @@ import json
 import os
 import pandas as pd
 
-path = "./chunks/"
-file_list = os.listdir(path)
+# Specify the base directory where artifacts are downloaded
+base_path = "./"
+
+# Initialize variables
 full = ""
 
-# 1. Combine chunk data
+# List all files in the directory
+file_list = [f for f in os.listdir(base_path) if f.startswith("c") and f.endswith(".json")]
+
+# Combine chunk data
 for file in file_list:
-    with open(path + file, "r") as f:
+    with open(os.path.join(base_path, file), "r") as f:
         data = f.read()
         # valid codes found in chunk
         if data.rstrip() != "":
-            full = full + data.rstrip() + ","
+            full += data.rstrip() + ","
+
+# Split combined data and filter out empty strings
 itunes_codes = full.split(",")
 itunes_codes = list(filter(None, itunes_codes))
 
