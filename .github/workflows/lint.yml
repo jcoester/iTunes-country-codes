@@ -10,6 +10,10 @@ on:
       - main
       - dev
 
+permissions:
+  checks: write
+  contents: write
+
 jobs:
   run-linters:
     name: Run linters
