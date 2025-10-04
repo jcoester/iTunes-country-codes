@@ -7,3 +7,5 @@ List of all available iTunes Country codes used for iTunes Store, Search API and
 A GitHub Action runs every Mo-Fr at 23:59 UTC and publishes detected changes automatically.
 
 [Permalink to JSON file](itunes_country_codes.json) ([Raw](itunes_country_codes.json?raw=1))
+
+**Update: This bot is still <ins>working correctly</ins>  as of Oct. 2025.** The Mar. 2023 release is up-to-date, I manually verified it.
