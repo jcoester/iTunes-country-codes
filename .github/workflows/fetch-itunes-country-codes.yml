@@ -28,12 +28,12 @@ jobs:
       total_chunks: 12
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v6
         with:
-          python-version: "3.10"
+          python-version: "3.14"
 
       - name: Install dependencies
         run: |
@@ -44,7 +44,7 @@ jobs:
         run: python script/fetch_itunes_country_codes.py $total_chunks ${{matrix.chunks}} > ./c_${{matrix.chunks}}.json
 
       - name: Upload chunks
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: chunks-${{ matrix.chunks }}
           path: ./c_${{matrix.chunks}}.json
@@ -54,12 +54,12 @@ jobs:
     needs: [fetch-chunks]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v6
         with:
-          python-version: "3.10"
+          python-version: "3.14"
 
       - name: Install dependencies
         run: |
@@ -71,7 +71,7 @@ jobs:
         run: echo "date=$(date +'%Y-%b-%d')" >> $GITHUB_OUTPUT
 
       - name: Download all fetched chunks
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           pattern: chunks-*
           merge-multiple: true
@@ -84,7 +84,7 @@ jobs:
           echo "EOF" >> $GITHUB_ENV
 
       - name: Auto-commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "(Automated) Updated iTunes Country codes"
           file_pattern: 'itunes_country_codes.json'
